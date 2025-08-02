@@ -1,3 +1,9 @@
-import "./styles.css"
-const documento = document.querySelector("*");
-documento.style.backgroundColor = "blue";
+import "./styles.css";
+import { addFormulario } from "./form";
+
+const botonCrear = document.querySelector("#crear");
+
+botonCrear.addEventListener("click", function(){
+    addFormulario();
+})
+
