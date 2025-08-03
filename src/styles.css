@@ -26,3 +26,9 @@ footer{
     transform: translate(-50%, -50%);
     background-color: rgba(200, 200, 200, 0.5);
 }
+.carta
+{
+    margin: 5px;
+    width: 100%;
+    height: 200px;
+}

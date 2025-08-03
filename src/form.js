@@ -1,6 +1,6 @@
 
 let formulario; // Ahora es global dentro del módulo
-import { crearCarta } from "./carta";
+import { carta } from "./carta";
 
 export function addFormulario() {
     // Si ya existe, no hacer nada
@@ -15,10 +15,13 @@ export function addFormulario() {
 
     // Configurar
     pregunta1.type = "text";
-    pregunta1.placeholder = "Pregunta 1";
+    pregunta1.placeholder = "Nombre del proyecto";
+    pregunta1.required = true;
+    pregunta1.minLength = 1;
 
-    pregunta2.type = "text";
+    pregunta2.type = "date";
     pregunta2.placeholder = "Pregunta 2";
+    pregunta2.required = true;
 
     botonFormulario.type = "submit";
     botonFormulario.textContent = "Enviar";
@@ -29,10 +32,14 @@ export function addFormulario() {
 
 
     document.body.appendChild(formulario);
-    botonFormulario.addEventListener("click",crearCarta)
+
+    //_-----------------------------------------------------
+    botonFormulario.addEventListener("click",function(){
     formulario.addEventListener("submit", function(event) {
-  event.preventDefault(); // ⛔ evita que recargue la página
-  console.log("Formulario enviado sin recargar");
+    event.preventDefault(); 
+    let newCarta = new carta(pregunta1.value,pregunta2.value);
+    newCarta.hacerCarta();
+    cerrarFormulario();})
 });
 
     // Esperar al siguiente tick para evitar que el clic en el botón dispare el cierre
@@ -43,8 +50,14 @@ export function addFormulario() {
 
 function handleOutsideClick(event) {
     if (formulario && !formulario.contains(event.target)) {
+        cerrarFormulario();
+    }
+}
+
+function cerrarFormulario() {
+    if (formulario) {
         formulario.remove();
         document.removeEventListener("click", handleOutsideClick);
-        formulario = null; // Limpia la referencia
+        formulario = null;
     }
 }
