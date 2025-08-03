@@ -1,9 +1,11 @@
 
+import { Tarea } from "./tareas";
 export class carta{
     constructor(proyecto,fecha,prioridad){
         this.proyecto = proyecto;
         this.fecha = fecha;
         this.prioridad = prioridad;
+        this.contar = 0;
     }
 
      hacerCarta(){
@@ -28,6 +30,13 @@ export class carta{
 
         cartaBotonCrear.innerText = "Agregar";
         cartaBotonBorrar.innerText = "Eliminar";
+
+        cartaBotonCrear.addEventListener("click", () =>
+        {
+            const newTarea = new Tarea;
+            this.contar = Tarea.tareasContador;
+            alert(this.contar);
+        })
 
         cartaBotonBorrar.addEventListener("click", () => {
     cart.remove();
