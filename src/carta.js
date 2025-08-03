@@ -1,15 +1,22 @@
 
 import { Tarea } from "./tareas";
+import { CartaTarea } from "./tareas";
+import { addFormularioTarea } from "./formTareas";
 export class carta{
+
+     static proyectos = [];
     constructor(proyecto,fecha,prioridad){
         this.proyecto = proyecto;
         this.fecha = fecha;
         this.prioridad = prioridad;
         this.contar = 0;
+        carta.proyectos.push(this);
+        localStorage.setItem("proyectos", JSON.stringify(carta.proyectos));
     }
 
      hacerCarta(){
         const content = document.querySelector(".sidebar");
+        const contenido  = document.querySelector(".content");
         const cart = document.createElement("div");
         cart.classList.add("carta")
         const cartaTitulo = document.createElement("h1");
@@ -30,16 +37,24 @@ export class carta{
 
         cartaBotonCrear.innerText = "Agregar";
         cartaBotonBorrar.innerText = "Eliminar";
+        cart.addEventListener("click", () => {
+            console.log(this.proyecto);
+            
+            CartaTarea.tareasRecuperar(this.proyecto);
+            console.log(carta.proyectos);
+        });
 
         cartaBotonCrear.addEventListener("click", () =>
         {
             const newTarea = new Tarea;
             this.contar = Tarea.tareasContador;
-            alert(this.contar);
+            addFormularioTarea(this.proyecto);
+
         })
 
         cartaBotonBorrar.addEventListener("click", () => {
     cart.remove();
+    contenido.innerText = "";
 });
 
 
@@ -68,7 +83,7 @@ export class carta{
         content.appendChild(cart)
         
     }
-
+    
      
 }
 
