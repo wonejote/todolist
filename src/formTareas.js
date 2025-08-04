@@ -2,7 +2,7 @@
 import { CartaTarea } from "./tareas";
 let formularioTarea; 
 
-export function addFormularioTarea(proyecto) {
+export function addFormularioTarea(proyecto,callback) {
     // Si ya existe, no hacer nada
     if (formularioTarea && document.body.contains(formularioTarea)) return;
 
@@ -35,10 +35,13 @@ export function addFormularioTarea(proyecto) {
     
     formularioTarea.addEventListener("submit", function(event) {
     event.preventDefault(); 
-    let newCarta = new CartaTarea(pregunta1.value,proyecto);
-    newCarta.crearCartaTarea();
+    let newCartaTarea = new CartaTarea(pregunta1.value,proyecto);
+    newCartaTarea.crearCartaTarea();
     
-    cerrarformularioTarea();}) 
+    cerrarformularioTarea();
+    
+     if (callback) callback(newCartaTarea);
+}) 
 
     
     setTimeout(() => {
