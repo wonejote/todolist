@@ -41,7 +41,8 @@ export class carta{
             console.log(this.proyecto);
             
             CartaTarea.tareasRecuperar(this.proyecto);
-            console.log(carta.proyectos);
+           
+            carta.proyectosRecuperar();
         });
 
         cartaBotonCrear.addEventListener("click", () =>
@@ -53,6 +54,9 @@ export class carta{
         })
 
         cartaBotonBorrar.addEventListener("click", () => {
+    
+    carta.proyectos = carta.proyectos.filter(item => item != this);
+        localStorage.setItem("proyectos", JSON.stringify(carta.proyectos));
     cart.remove();
     contenido.innerText = "";
 });
@@ -84,7 +88,11 @@ export class carta{
         
     }
     
-     
+     static proyectosRecuperar(){
+        const listaProyectos = JSON.parse(localStorage.getItem("proyectos"));
+        console.log(listaProyectos);
+        return listaProyectos;
+     }
 }
 
 
