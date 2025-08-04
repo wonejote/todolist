@@ -26,7 +26,8 @@ export class CartaTarea {
     crearCartaTarea() {
         const content = document.querySelector(".content");
         const cartaDiv = document.createElement("div");
-        cartaDiv.classList.add(".carta");
+        cartaDiv.classList.add("carta")
+        cartaDiv.classList.add("carta-t");
         const cartah1 = document.createElement("h1");
         const cartaLabel = document.createElement("label");
         const cartaCheck = document.createElement("input");
@@ -53,6 +54,7 @@ export class CartaTarea {
         const content = document.querySelector(".content");
         const cartaDiv = document.createElement("div");
         cartaDiv.classList.add("carta");
+        cartaDiv.classList.add("carta-t");
         const cartah1 = document.createElement("h1");
         const cartaLabel = document.createElement("label");
         const cartaCheck = document.createElement("input");

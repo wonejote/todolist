@@ -35,7 +35,7 @@ export class carta{
         cart.appendChild(cartaBotonCrear);
         cart.appendChild(cartaBotonBorrar);
 
-        cartaBotonCrear.innerText = "Agregar";
+        cartaBotonCrear.innerText = "Agregar Tarea";
         cartaBotonBorrar.innerText = "Eliminar";
         cart.addEventListener("click", () => {
             console.log(this.proyecto);
@@ -64,7 +64,7 @@ export class carta{
 
         cartaTitulo.innerText = this.proyecto;
         cartaFecha.innerText = this.fecha;
-        cartaPrioridad.append("propiedad: ")
+        cartaPrioridad.append("prioridad: ")
         cartaPrioridadSpan.innerText =  this.prioridad;
         cartaPrioridad.appendChild(cartaPrioridadSpan);
 
