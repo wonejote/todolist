@@ -58,7 +58,7 @@ export function addFormulario() {
     formulario.addEventListener("submit", function(event) {
     event.preventDefault(); 
     let newCarta = new carta(pregunta1.value,pregunta2.value,pregunta3.value);
-    newCarta.hacerCarta();
+    
     cerrarFormulario();})
 ;
 

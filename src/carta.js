@@ -5,12 +5,16 @@ import { addFormularioTarea } from "./formTareas";
 export class carta{
 
      static proyectos = [];
-    constructor(proyecto,fecha,prioridad){
+    constructor(proyecto,fecha,prioridad,tareas){
         this.proyecto = proyecto;
         this.fecha = fecha;
         this.prioridad = prioridad;
         this.contar = 0;
+        if (tareas) {this.tareas = tareas;}
+        else {this.tareas = [];}
+        this.hacerCarta();
         carta.proyectos.push(this);
+        this.hacerTareas(this.tareas,this.proyecto);
         localStorage.setItem("proyectos", JSON.stringify(carta.proyectos));
     }
 
@@ -49,16 +53,21 @@ export class carta{
         {
             const newTarea = new Tarea;
             this.contar = Tarea.tareasContador;
-            addFormularioTarea(this.proyecto);
-
-        })
+            
+             addFormularioTarea(this.proyecto, (cartaTareaCreada) => {
+             this.tareas.push(cartaTareaCreada);
+             console.log("Tarea agregada:", cartaTareaCreada);
+             localStorage.setItem("proyectos", JSON.stringify(carta.proyectos));
+            });
+             
+         })
 
         cartaBotonBorrar.addEventListener("click", () => {
     
-    carta.proyectos = carta.proyectos.filter(item => item != this);
+        carta.proyectos = carta.proyectos.filter(item => item != this);
         localStorage.setItem("proyectos", JSON.stringify(carta.proyectos));
-    cart.remove();
-    contenido.innerText = "";
+        cart.remove();
+        contenido.innerText = "";
 });
 
 
@@ -92,6 +101,16 @@ export class carta{
         const listaProyectos = JSON.parse(localStorage.getItem("proyectos"));
         console.log(listaProyectos);
         return listaProyectos;
+     }
+     hacerTareas(titulos,proyecto)
+     {
+        if (titulos)
+        {
+            for (const titulo of titulos){
+                const newCartaTarea = new CartaTarea(titulo.titulo,proyecto);
+                newCartaTarea.crearCartaTarea();
+            }
+        }
      }
 }
 
